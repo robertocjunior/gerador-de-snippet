@@ -1,6 +1,10 @@
 # gerrar-snippet
 código para gerar snippet de códigos para colar
 
+para gerar o executave, execute:
+
+``python -m PyInstaller --onefile --console --icon=gerar_snippet.ico gerar_snippet.py``
+
 # Tabela de Caracteres ASCII Art (Box Drawing) via Alt + Numpad (Windows)
 
 Lista simplificada dos caracteres de desenho em caixa que funcionam com **Alt + Numpad** no Windows.
