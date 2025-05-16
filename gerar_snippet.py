@@ -50,13 +50,13 @@ def menu_principal():
     # Criando a lista de opções
     opcoes = [
         "📂 Caminho do Arquivo",
-        "🖋️  Linguagem",
+        "🖋️ Linguagem",
         "🔠 Fonte",
         "🔢 Tamanho da Fonte",
         "📊 Números de Linha",
         "🎨 Estilo de Cores",
-        "🖼️  Espaçamento da Imagem (Image Pad)",
-        "↕️  Espaçamento da Linha (Line Pad)",
+        "🖼️ Espaçamento da Imagem (Image Pad)",
+        "📏 Espaçamento da Linha (Line Pad)",
         "👀 Ver Estilos Disponíveis",
         "✨ Gerar Imagem",
         "❌ Sair"
@@ -206,7 +206,7 @@ def main():
             break
         elif opcao == "📂 Caminho do Arquivo":
             configurar_caminho()
-        elif opcao == "🖋️  Linguagem":
+        elif opcao == "🖋️ Linguagem":
             configurar_linguagem()
         elif opcao == "🔠 Fonte":
             configurar_fonte()
@@ -216,9 +216,9 @@ def main():
             configurar_numeros_linha()
         elif opcao == "🎨 Estilo de Cores":
             configurar_estilo()
-        elif opcao == "🖼️  Espaçamento da Imagem (Image Pad)":
+        elif opcao == "🖼️ Espaçamento da Imagem (Image Pad)":
             configurar_image_pad()
-        elif opcao == "↕️  Espaçamento da Linha (Line Pad)":
+        elif opcao == "📏 Espaçamento da Linha (Line Pad)":
             configurar_line_pad()
         elif opcao == "👀 Ver Estilos Disponíveis":
             abrir_documentacao_estilos()
