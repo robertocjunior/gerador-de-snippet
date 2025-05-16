@@ -47,25 +47,29 @@ def menu_principal():
     limpar_tela()
     mostrar_configuracao()
     
+    # Criando a lista de opções
+    opcoes = [
+        "Caminho do Arquivo",
+        "Linguagem",
+        "Fonte",
+        "Tamanho da Fonte",
+        "Números de Linha",
+        "Estilo de Cores",
+        "Espaçamento da Imagem (Image Pad)",
+        "Espaçamento da Linha (Line Pad)",
+        "Ver Estilos Disponíveis",
+        "Gerar Imagem",
+        "Sair"
+    ]
+    
     opcao = questionary.select(
         "O que você deseja configurar?",
-        choices=[
-            "Caminho do Arquivo",
-            "Linguagem",
-            "Fonte",
-            "Tamanho da Fonte",
-            "Números de Linha",
-            "Estilo de Cores",
-            "Espaçamento da Imagem (Image Pad)",
-            "Espaçamento da Linha (Line Pad)",
-            "Gerar Imagem",
-            "Ver Estilos Disponíveis",
-            "Sair"
-        ],
-        default="Gerar Imagem"
+        choices=opcoes,
+        default=opcoes[0]  # Ponteiro começa na primeira opção
     ).ask()
     
-    return opcao
+    # Removendo a formatação para comparação
+    return opcao.replace("[red]", "").replace("[/red]", "")
 
 def abrir_documentacao_estilos():
     """Abre a documentação de estilos do Pygments no navegador"""
@@ -84,7 +88,7 @@ def configurar_caminho():
 
 def configurar_linguagem():
     """Configura a linguagem de programação"""
-    linguagens = ["python", "javascript", "java", "c", "cpp", "html", "css", "text", "Outra linguagem..."]
+    linguagens = ["python", "text", "javascript", "java", "c", "cpp", "html", "css", "Outra linguagem..."]
     escolha = questionary.select(
         "Selecione a linguagem:",
         choices=linguagens,
@@ -216,10 +220,10 @@ def main():
             configurar_image_pad()
         elif opcao == "Espaçamento da Linha (Line Pad)":
             configurar_line_pad()
-        elif opcao == "Gerar Imagem":
-            gerar_imagem()
         elif opcao == "Ver Estilos Disponíveis":
             abrir_documentacao_estilos()
+        elif opcao == "Gerar Imagem":
+            gerar_imagem()
 
 if __name__ == "__main__":
     main()
