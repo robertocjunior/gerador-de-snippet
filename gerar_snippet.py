@@ -17,12 +17,12 @@ import time
 config = {
     "caminho_arquivo": "",
     "linguagem": "python",
-    "font_name": "Consolas",
-    "font_size": 16,
-    "line_numbers": True,
-    "style": "material",
-    "image_pad": 10,
-    "line_pad": 2
+    "Fonte": "Consolas",
+    "Tamanho da Fonte": 16,
+    "Números nas Linha": True,
+    "estilo": "material",
+    "Espaçamento da Imagem (Image Pad)": 10,
+    "Espaçamento da Linha (Line Pad)": 2
 }
 
 console = Console()
@@ -38,7 +38,7 @@ def mostrar_configuracao():
     table.add_column("Valor", style="magenta")
     
     for chave, valor in config.items():
-        table.add_row(chave.replace("_", " ").title(), str(valor))
+        table.add_row(chave, str(valor))
     
     console.print(Panel.fit(table, title="[bold]Configuração Atual[/]", border_style="blue"))
 
@@ -47,13 +47,12 @@ def menu_principal():
     limpar_tela()
     mostrar_configuracao()
     
-    # Criando a lista de opções
     opcoes = [
         "📂 Caminho do Arquivo",
         "🖋️ Linguagem",
         "🔠 Fonte",
         "🔢 Tamanho da Fonte",
-        "📊 Números de Linha",
+        "📊 Números nas Linha",
         "🎨 Estilo de Cores",
         "🖼️ Espaçamento da Imagem (Image Pad)",
         "📏 Espaçamento da Linha (Line Pad)",
@@ -65,11 +64,10 @@ def menu_principal():
     opcao = questionary.select(
         "O que você deseja configurar?",
         choices=opcoes,
-        default=opcoes[0]  # Ponteiro começa na primeira opção
+        default=opcoes[0]
     ).ask()
     
-    # Removendo a formatação para comparação
-    return opcao.replace("[red]", "").replace("[/red]", "")
+    return opcao
 
 def abrir_documentacao_estilos():
     """Abre a documentação de estilos do Pygments no navegador"""
@@ -107,55 +105,63 @@ def configurar_linguagem():
 
 def configurar_fonte():
     """Configura o tipo de fonte"""
-    fontes = ["Consolas", "Courier New", "DejaVu Sans Mono", "Lucida Console", "Monaco"]
-    config["font_name"] = questionary.select(
+    fontes = ["Consolas", "Courier New", "DejaVu Sans Mono", "Lucida Console"]
+    config["Fonte"] = questionary.select(
         "Selecione a fonte:",
         choices=fontes,
-        default=config["font_name"]
+        default=config["Fonte"]
     ).ask()
 
 def configurar_tamanho_fonte():
     """Configura o tamanho da fonte"""
     tamanho = questionary.text(
-        f"Tamanho atual: {config['font_size']}. Digite o novo tamanho:",
+        f"Tamanho atual: {config['Tamanho da Fonte']}. Digite o novo tamanho:",
         validate=lambda x: x.isdigit() and 8 <= int(x) <= 36
     ).ask()
     if tamanho:
-        config["font_size"] = int(tamanho)
+        config["Tamanho da Fonte"] = int(tamanho)
 
 def configurar_numeros_linha():
     """Configura se mostra números de linha"""
-    config["line_numbers"] = questionary.confirm(
+    opcoes = [
+        {"name": "✅ Sim", "value": True},
+        {"name": "❌ Não", "value": False}
+    ]
+    
+    escolha = questionary.select(
         "Mostrar números de linha?",
-        default=config["line_numbers"]
+        choices=opcoes,
+        default=opcoes[0] if config["Números nas Linha"] else opcoes[1]
     ).ask()
+    
+    config["Números nas Linha"] = escolha
 
 def configurar_estilo():
     """Configura o estilo de cores"""
     estilos = list(get_all_styles())
-    config["style"] = questionary.select(
+    config["estilo"] = questionary.select(
         "Selecione o estilo de cores:",
         choices=estilos,
-        default=config["style"]
+        default=config["estilo"]
     ).ask()
 
 def configurar_image_pad():
     """Configura o espaçamento da imagem"""
     pad = questionary.text(
-        f"Espaçamento atual da imagem: {config['image_pad']}. Digite o novo valor:",
+        f"Espaçamento atual da imagem: {config['Espaçamento da Imagem (Image Pad)']}. Digite o novo valor:",
         validate=lambda x: x.isdigit() and 0 <= int(x) <= 50
     ).ask()
     if pad:
-        config["image_pad"] = int(pad)
+        config["Espaçamento da Imagem (Image Pad)"] = int(pad)
 
 def configurar_line_pad():
     """Configura o espaçamento entre linhas"""
     pad = questionary.text(
-        f"Espaçamento atual entre linhas: {config['line_pad']}. Digite o novo valor:",
+        f"Espaçamento atual entre linhas: {config['Espaçamento da Linha (Line Pad)']}. Digite o novo valor:",
         validate=lambda x: x.isdigit() and 0 <= int(x) <= 10
     ).ask()
     if pad:
-        config["line_pad"] = int(pad)
+        config["Espaçamento da Linha (Line Pad)"] = int(pad)
 
 def gerar_imagem():
     """Gera a imagem com as configurações atuais"""
@@ -170,12 +176,12 @@ def gerar_imagem():
         
         lexer = get_lexer_by_name(config["linguagem"])
         formatter = ImageFormatter(
-            font_name=config["font_name"],
-            font_size=config["font_size"],
-            line_numbers=config["line_numbers"],
-            style=config["style"],
-            image_pad=config["image_pad"],
-            line_pad=config["line_pad"]
+            font_name=config["Fonte"],
+            font_size=config["Tamanho da Fonte"],
+            line_numbers=config["Números nas Linha"],
+            style=config["estilo"],
+            image_pad=config["Espaçamento da Imagem (Image Pad)"],
+            line_pad=config["Espaçamento da Linha (Line Pad)"]
         )
         
         image_data = highlight(codigo_fonte, lexer, formatter)
@@ -188,7 +194,6 @@ def gerar_imagem():
         
         console.print(f"[green]Imagem gerada com sucesso: {nome_imagem}[/]")
         
-        # Mostra a imagem
         image = Image.open(io.BytesIO(image_data))
         image.show()
         
@@ -212,7 +217,7 @@ def main():
             configurar_fonte()
         elif opcao == "🔢 Tamanho da Fonte":
             configurar_tamanho_fonte()
-        elif opcao == "📊 Números de Linha":
+        elif opcao == "📊 Números nas Linha":
             configurar_numeros_linha()
         elif opcao == "🎨 Estilo de Cores":
             configurar_estilo()
