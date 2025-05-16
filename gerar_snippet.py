@@ -49,17 +49,17 @@ def menu_principal():
     
     # Criando a lista de opções
     opcoes = [
-        "Caminho do Arquivo",
-        "Linguagem",
-        "Fonte",
-        "Tamanho da Fonte",
-        "Números de Linha",
-        "Estilo de Cores",
-        "Espaçamento da Imagem (Image Pad)",
-        "Espaçamento da Linha (Line Pad)",
-        "Ver Estilos Disponíveis",
-        "Gerar Imagem",
-        "Sair"
+        "📂 Caminho do Arquivo",
+        "🖋️  Linguagem",
+        "🔠 Fonte",
+        "🔢 Tamanho da Fonte",
+        "📊 Números de Linha",
+        "🎨 Estilo de Cores",
+        "🖼️  Espaçamento da Imagem (Image Pad)",
+        "↕️  Espaçamento da Linha (Line Pad)",
+        "👀 Ver Estilos Disponíveis",
+        "✨ Gerar Imagem",
+        "❌ Sair"
     ]
     
     opcao = questionary.select(
@@ -202,27 +202,27 @@ def main():
     while True:
         opcao = menu_principal()
         
-        if opcao == "Sair":
+        if opcao == "❌ Sair":
             break
-        elif opcao == "Caminho do Arquivo":
+        elif opcao == "📂 Caminho do Arquivo":
             configurar_caminho()
-        elif opcao == "Linguagem":
+        elif opcao == "🖋️  Linguagem":
             configurar_linguagem()
-        elif opcao == "Fonte":
+        elif opcao == "🔠 Fonte":
             configurar_fonte()
-        elif opcao == "Tamanho da Fonte":
+        elif opcao == "🔢 Tamanho da Fonte":
             configurar_tamanho_fonte()
-        elif opcao == "Números de Linha":
+        elif opcao == "📊 Números de Linha":
             configurar_numeros_linha()
-        elif opcao == "Estilo de Cores":
+        elif opcao == "🎨 Estilo de Cores":
             configurar_estilo()
-        elif opcao == "Espaçamento da Imagem (Image Pad)":
+        elif opcao == "🖼️  Espaçamento da Imagem (Image Pad)":
             configurar_image_pad()
-        elif opcao == "Espaçamento da Linha (Line Pad)":
+        elif opcao == "↕️  Espaçamento da Linha (Line Pad)":
             configurar_line_pad()
-        elif opcao == "Ver Estilos Disponíveis":
+        elif opcao == "👀 Ver Estilos Disponíveis":
             abrir_documentacao_estilos()
-        elif opcao == "Gerar Imagem":
+        elif opcao == "✨ Gerar Imagem":
             gerar_imagem()
 
 if __name__ == "__main__":
