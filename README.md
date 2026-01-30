@@ -1,4 +1,4 @@
-# gerrar-snippet
+# gerar-snippet
 código para gerar snippet de códigos para colar
 
 para gerar o executave, execute:
